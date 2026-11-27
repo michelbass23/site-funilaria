@@ -199,10 +199,18 @@ export default function Manifesto() {
                   />
                   <video
                     src={video01}
-                    autoPlay
                     muted
                     loop
                     playsInline
+                    preload="none"
+                    ref={(el) => {
+                      if (!el) return
+                      const obs = new IntersectionObserver(
+                        ([entry]) => { if (entry.isIntersecting) el.play() },
+                        { threshold: 0.1 }
+                      )
+                      obs.observe(el)
+                    }}
                     className="absolute inset-0 w-full h-full object-cover object-center"
                     style={{ filter: 'brightness(0.78) saturate(0.9) contrast(1.05)' }}
                   />

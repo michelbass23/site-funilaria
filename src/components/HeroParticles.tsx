@@ -10,6 +10,9 @@ export default function HeroParticles() {
     const canvas = canvasRef.current
     if (!canvas) return
 
+    // Skip WebGL on mobile — too heavy and causes hangs
+    if (window.innerWidth < 768) return
+
     // ── Renderer ───────────────────────────────────
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
